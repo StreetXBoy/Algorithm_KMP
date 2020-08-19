@@ -12,25 +12,30 @@
 
 
 //char --->length   string -->.length()
+
+//i 不动回溯j！！！！
+
 public class kmp {
+
+    //求next 过程相当于错位匹配！！！！
+    //https://www.zhihu.com/question/21923021
+    //字符串中 i 指针之前的 PMT[j −1] 位就一定与模式字符串的第 0 位至第 PMT[j−1] 位是相同的。这是因为主字符串在 i 位失配，也就意味着主字符串从 i−j 到 i 这一段是与模式字符串的 0 到 j 这一段是完全相同的。
     public  static  int[] generateNext(char[] T){
         int len=T.length;
         int []next =new int[len];
         next[0]=-1;
-        int k;
-        for(int j=2;j< T.length;j++){
-            k=next[j-1];
-            while(k!=-1) {
-                if (T[j - 1] == T[k]) {
-                    next[j] = k + 1;
-                    break;
-                } else {
-                    k = next[k];
-                    //longset max prefix min lowprefix sub
-                }
-                next[j] = 0;
+        int i=0;
+        int j=-1;
+        while (i<len-1){
+            if(j==-1||T[i]==T[j]){
+                ++i;
+                ++j;
+                next[i]=j;
+            }else{
+                j=next[j];
             }
         }
+
     return  next;
     }
 
